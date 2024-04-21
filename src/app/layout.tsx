@@ -4,12 +4,15 @@ import './globals.css'
 import { AntdRegistry } from '@ant-design/nextjs-registry'
 
 const inter = Poppins({
+    subsets: ['latin'],
     weight: ['100', '300', '400', '500', '700', '900'],
     display: 'swap',
     variable: '--font-poppins',
 })
 
 const roboto = Roboto({
+    subsets: ['latin'],
+
     display: 'swap',
     weight: ['100', '300', '400', '500', '700', '900'],
     variable: '--font-roboto',
