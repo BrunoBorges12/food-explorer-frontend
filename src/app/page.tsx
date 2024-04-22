@@ -1,5 +1,5 @@
-import { Input } from '@/components/Input'
+import { Button } from '@/components/Button'
 
 export default function Home() {
-    return <Input label="Nome" placeholder="ola" type="password" />
+    return <Button label="Pedidos" checkout="5" />
 }
