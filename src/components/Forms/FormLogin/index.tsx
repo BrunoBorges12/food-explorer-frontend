@@ -5,10 +5,10 @@ import { Space } from 'antd'
 export const FormLogin = () => {
     return (
         <form
-            className="bg-dark-900 p-14  flex flex-col max-w-[30rem] h-[35rem] w-full  rounded-xl"
+            className="bg-dark-900 p-14  flex flex-col max-w-[30rem] h-[36rem] w-full  rounded-xl"
             action=""
         >
-            <h1 className="text-light-100  text-3xl text-center font-poppins pb-14 ">
+            <h1 className="text-light-100  text-3xl text-center font-poppins pb-10 ">
                 Crie sua conta
             </h1>
             <Space size={'large'} direction="vertical">
@@ -29,7 +29,7 @@ export const FormLogin = () => {
                     placeholder="No mínimo 6 caracteres"
                 />
             </Space>
-            <div className="py-5">
+            <div className="pb-5 pt-7">
                 <Button className="w-full pt-5" label="Criar Conta" />
             </div>
             <a className="text-center text-light-100" href="">
