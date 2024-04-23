@@ -15,7 +15,7 @@ export const Button = (props: PropsButton) => {
         <ButtonAntd
             {...props}
             className={cls(
-                '!bg-tomato-100 !rounded-md px-8 py-3',
+                '!bg-tomato-200 !rounded-sm px-8 !py-5 !border-none !flex items-center justify-center',
                 props.className,
                 props.background || 'tomato-100',
             )}

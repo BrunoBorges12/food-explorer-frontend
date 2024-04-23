@@ -8,7 +8,7 @@ export const Logo = ({ size }: propsLogo) => {
         <svg
             className={cls(
                 {
-                    'w-12 h-12': size === 'large',
+                    'w-10 h-10': size === 'large',
                     'w-7 h-7': size === 'small',
                 },
                 '',
