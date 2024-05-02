@@ -3,7 +3,7 @@ import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Space } from 'antd'
 import { FormProvider, useForm } from 'react-hook-form'
-import { signIn } from 'next-auth/react'
+import { signIn, useSession } from 'next-auth/react'
 
 export type propsFormLogin = {
     signUp?: boolean
@@ -18,6 +18,9 @@ export const FormLogin = ({ signUp }: propsFormLogin) => {
     const onSubmit = (data: propsFormInput) => {
         signIn('credentials', { redirect: false, ...data })
     }
+    const { data: session } = useSession()
+
+    console.log(session)
     return (
         <FormProvider {...methods}>
             <form className="bg-dark-900 px-14  py-20 flex flex-col max-w-[30rem] w-full  rounded-xl">

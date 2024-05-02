@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Poppins, Roboto } from 'next/font/google'
 import './globals.css'
 import { AntdRegistry } from '@ant-design/nextjs-registry'
+import SessionWrapper from '@/components/SessionWrapper'
 
 const inter = Poppins({
     subsets: ['latin'],
@@ -33,7 +34,10 @@ export default function RootLayout({
                 suppressHydrationWarning
                 className={`${inter.variable} ${roboto.variable}`}
             >
-                <AntdRegistry>{children}</AntdRegistry>
+                <AntdRegistry>
+                    {' '}
+                    <SessionWrapper>{children}</SessionWrapper>
+                </AntdRegistry>
             </body>
         </html>
     )
