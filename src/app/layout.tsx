@@ -28,8 +28,11 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <html lang="en">
-            <body className={`${inter.variable} ${roboto.variable}`}>
+        <html lang="en" suppressHydrationWarning>
+            <body
+                suppressHydrationWarning
+                className={`${inter.variable} ${roboto.variable}`}
+            >
                 <AntdRegistry>{children}</AntdRegistry>
             </body>
         </html>

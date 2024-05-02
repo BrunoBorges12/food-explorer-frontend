@@ -1,9 +1,9 @@
 import { InputProps } from 'antd'
 
-interface input extends InputProps {
+interface CustomInputProps extends InputProps {
     type?: 'password' | 'text'
     background?: string
     label: string
 }
 
-export type propsInput = input & InputProps
+export type propsInput = CustomInputProps & InputProps
