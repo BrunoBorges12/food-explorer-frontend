@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client'
 import { Input as InputAntd } from 'antd'
 import { tv } from 'tailwind-variants'
@@ -22,7 +23,10 @@ const inputTypeMap: InputTypeMap = {
     text: InputAntd,
 }
 export const Input = (props: propsInput) => {
-    const { control } = useFormContext()
+    const {
+        control,
+        formState: { errors },
+    } = useFormContext()
     const InputComponent =
         inputTypeMap[props.type ? props.type : ''] || InputAntd
 
@@ -55,6 +59,11 @@ export const Input = (props: propsInput) => {
                     )}
                 />
             )}
+            {errors && (
+                <span className="text-red-500 font-poppins  text-sm">
+                    {id && (errors[id]?.message as any)}
+                </span>
+            )}{' '}
         </p>
     )
 }

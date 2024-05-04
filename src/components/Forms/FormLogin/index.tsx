@@ -1,28 +1,48 @@
 'use client'
 import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
-import { Space } from 'antd'
+import { Space, message } from 'antd'
 import { FormProvider, useForm } from 'react-hook-form'
 import { signIn, useSession } from 'next-auth/react'
+import { useState } from 'react'
+import {
+    RegisterSchema,
+    UserSchema,
+    propUserInput,
+    propsRegisterInput,
+} from './schemas/user'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export type propsFormLogin = {
     signUp?: boolean
 }
-type propsFormInput = {
-    email: string
-    password: string
-    name: string
-}
-export const FormLogin = ({ signUp }: propsFormLogin) => {
-    const methods = useForm<propsFormInput>()
-    const onSubmit = (data: propsFormInput) => {
-        signIn('credentials', { redirect: false, ...data })
-    }
-    const { data: session } = useSession()
 
-    console.log(session)
+export const FormLogin = ({ signUp }: propsFormLogin) => {
+    const [messageApi, contextHolder] = message.useMessage()
+    const { data: session } = useSession()
+    const [loading, setLoading] = useState(false)
+    const methods = useForm<propUserInput | propsRegisterInput>({
+        resolver: zodResolver(signUp ? RegisterSchema : UserSchema),
+    })
+    const onSubmit = async (data: propUserInput | propsRegisterInput) => {
+        setLoading(true)
+
+        const re = await signIn('credentials', { redirect: false, ...data })
+
+        if (re.status === 401) {
+            setTimeout(() => {
+                setLoading(false)
+                messageApi.open({
+                    type: 'error',
+                    content: 'Email ou senha icorreto',
+                })
+            }, 1000)
+        }
+    }
+
     return (
         <FormProvider {...methods}>
+            {contextHolder}
             <form className="bg-dark-900 px-14  py-20 flex flex-col max-w-[30rem] w-full  rounded-xl">
                 <h1 className="text-light-100  text-3xl text-center font-poppins pb-10 ">
                     {signUp ? '  Crie sua conta' : 'Faça login'}
@@ -49,8 +69,9 @@ export const FormLogin = ({ signUp }: propsFormLogin) => {
                 </Space>
                 <div className="pb-5 pt-7">
                     <Button
-                        className="w-full pt-5"
-                        label="Criar Conta"
+                        loading={loading}
+                        className="w-full pt-5 capitalize"
+                        label={signUp ? 'criar Conta' : 'entra'}
                         onClick={methods.handleSubmit(onSubmit)}
                     />
                 </div>
