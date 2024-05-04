@@ -3,7 +3,7 @@ import { Button } from '@/components/Button'
 import { Input } from '@/components/Input'
 import { Space, message } from 'antd'
 import { FormProvider, useForm } from 'react-hook-form'
-import { signIn, useSession } from 'next-auth/react'
+import { signIn } from 'next-auth/react'
 import { useState } from 'react'
 import {
     RegisterSchema,
@@ -12,6 +12,7 @@ import {
     propsRegisterInput,
 } from './schemas/user'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { register } from './api/register'
 
 export type propsFormLogin = {
     signUp?: boolean
@@ -19,24 +20,37 @@ export type propsFormLogin = {
 
 export const FormLogin = ({ signUp }: propsFormLogin) => {
     const [messageApi, contextHolder] = message.useMessage()
-    const { data: session } = useSession()
     const [loading, setLoading] = useState(false)
     const methods = useForm<propUserInput | propsRegisterInput>({
         resolver: zodResolver(signUp ? RegisterSchema : UserSchema),
     })
     const onSubmit = async (data: propUserInput | propsRegisterInput) => {
         setLoading(true)
+        if (!signUp) {
+            const re = await signIn('credentials', { redirect: false, ...data })
 
-        const re = await signIn('credentials', { redirect: false, ...data })
-
-        if (re.status === 401) {
-            setTimeout(() => {
-                setLoading(false)
-                messageApi.open({
-                    type: 'error',
-                    content: 'Email ou senha icorreto',
-                })
-            }, 1000)
+            if (re && re.status === 401) {
+                setTimeout(() => {
+                    setLoading(false)
+                    messageApi.open({
+                        type: 'error',
+                        content: 'Email ou senha icorreto',
+                    })
+                }, 1000)
+            }
+        } else {
+            try {
+                const isRegister = await register(data as propsRegisterInput)
+            } catch {
+                setTimeout(() => {
+                    setLoading(false)
+                    messageApi.open({
+                        type: 'error',
+                        content:
+                            'O usuário com este e-mail já existe no sistema',
+                    })
+                }, 1000)
+            }
         }
     }
 
