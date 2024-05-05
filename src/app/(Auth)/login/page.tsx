@@ -1,5 +1,5 @@
-import { FormLogin } from '@/components/Forms/FormLogin'
+import { FormAuth } from '@/components/Forms/FormAuth'
 
 export default function Login() {
-    return <FormLogin />
+    return <FormAuth mode="login" />
 }

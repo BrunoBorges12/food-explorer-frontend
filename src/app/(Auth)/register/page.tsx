@@ -1,5 +1,5 @@
-import { FormLogin } from '@/components/Forms/FormLogin'
+import { FormAuth } from '@/components/Forms/FormAuth'
 
 export default function Register() {
-    return <FormLogin signUp={true} />
+    return <FormAuth mode="register" />
 }
