@@ -8,7 +8,7 @@ type propsFormLogin = {
 }
 export const FormAuth = ({ mode }: propsFormLogin) => {
     return (
-        <form className="bg-dark-900 px-14  py-20 flex flex-col max-w-[30rem] w-full  rounded-xl">
+        <form className=" px-14  flex flex-col max-w-[30rem] w-full  rounded-xl  lg:py-20 lg:bg-dark-900">
             {mode == 'login' ? <FormLogin /> : <FormRegister />}
         </form>
     )

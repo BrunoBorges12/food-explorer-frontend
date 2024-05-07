@@ -2,11 +2,11 @@ import type { NextAuthOptions } from 'next-auth'
 import { jwtDecode } from 'jwt-decode'
 export const authConfig = {
     jwt: {
-        maxAge: 10,
+        maxAge: 60 * 60 * 24, //1 dia,
     },
     session: {
         strategy: 'jwt',
-        maxAge: 10,
+        maxAge: 60 * 60 * 24, //1 dia,
     },
     pages: {
         signIn: '/login',
