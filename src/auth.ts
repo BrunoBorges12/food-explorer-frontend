@@ -19,7 +19,7 @@ export const handler = NextAuth({
                     formData.append('password', credentials.password as string)
 
                     const res = await axios.post(
-                        'http://127.0.0.1:8000/v1/api/login',
+                        process.env.NEXT_PUBLIC_API_LOCAL + '/login',
                         formData,
                     )
                     const user = res.data

@@ -2,7 +2,7 @@ declare global {
     namespace NodeJS {
         interface ProcessEnv {
             NEXTAUTH_URL: string
-            API_LOCAL?: string
+            NEXT_PUBLIC_API_LOCAL: string
             NEXTAUTH_SECRET: string
         }
     }
