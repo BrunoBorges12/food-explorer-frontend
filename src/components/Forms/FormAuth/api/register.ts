@@ -1,15 +1,21 @@
-import axios from 'axios'
+import htpp from '@/services/http'
 import { propsRegisterInput } from '../schemas/user'
-export async function register(data: propsRegisterInput) {
-    const requestData = {
-        email: data.email,
-        password: data.password,
-        full_name: data.name,
+import axios, { Axios, AxiosError } from 'axios'
+export async function registerUser(data: propsRegisterInput) {
+    try {
+        const registerInstance = await htpp()
+        const requestData = {
+            email: data.email,
+            password: data.password,
+            full_name: data.name,
+        }
+        const res = await registerInstance.post('/register', requestData)
+        return res.data
+    } catch (e) {
+        const { response } = e as AxiosError
+        if (response?.data) {
+            return response
+        }
+        return e
     }
-
-    const res = await axios.post(
-        'http://127.0.0.1:8000/v1/api/register',
-        requestData,
-    )
-    return res.data
 }

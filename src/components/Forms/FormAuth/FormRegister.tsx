@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { Space, message } from 'antd'
 import { Input } from '@/components/Input'
 import { Form } from '../Form'
-import { register } from './api/register'
+import { registerUser } from './api/register'
 import { Button } from '@/components/Button'
 
 export const FormRegister = () => {
@@ -18,18 +18,9 @@ export const FormRegister = () => {
     const [messageApi, contextHolder] = message.useMessage()
 
     const onSubmit = async (data: propsRegisterInput) => {
-        setLoading(true)
-        try {
-            await register(data)
-        } catch {
-            setTimeout(() => {
-                setLoading(false)
-                messageApi.open({
-                    type: 'error',
-                    content: 'O usuário com este e-mail já existe no sistema',
-                })
-            }, 1000)
-        }
+        setLoading(false)
+        const res = await registerUser(data)
+        console.log('res', res)
     }
     return (
         <Form methods={methods}>
