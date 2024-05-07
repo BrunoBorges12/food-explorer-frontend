@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import htpp from '@/services/http'
 import { propsRegisterInput } from '../schemas/user'
-import axios, { Axios, AxiosError } from 'axios'
-export async function registerUser(data: propsRegisterInput) {
+import { AxiosError, AxiosPromise } from 'axios'
+export async function registerUser(
+    data: propsRegisterInput,
+): Promise<AxiosPromise> {
     try {
         const registerInstance = await htpp()
         const requestData = {
@@ -10,12 +13,12 @@ export async function registerUser(data: propsRegisterInput) {
             full_name: data.name,
         }
         const res = await registerInstance.post('/register', requestData)
-        return res.data
+        return res
     } catch (e) {
         const { response } = e as AxiosError
         if (response?.data) {
             return response
         }
-        return e
+        return e as any
     }
 }

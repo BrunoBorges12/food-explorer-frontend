@@ -8,19 +8,54 @@ import { Input } from '@/components/Input'
 import { Form } from '../Form'
 import { registerUser } from './api/register'
 import { Button } from '@/components/Button'
+import { useRouter } from 'next/navigation'
 
 export const FormRegister = () => {
     const [loading, setLoading] = useState(false)
     const methods = useForm<propsRegisterInput>({
         resolver: zodResolver(RegisterSchema),
     })
+    const router = useRouter()
 
     const [messageApi, contextHolder] = message.useMessage()
 
     const onSubmit = async (data: propsRegisterInput) => {
-        setLoading(false)
+        setLoading(true)
         const res = await registerUser(data)
-        console.log('res', res)
+        //nessa parte precisa ser criado um hook , muita repetição de codico
+        if (!res.status) {
+            setTimeout(() => {
+                setLoading(false)
+                messageApi.open({
+                    type: 'error',
+                    content:
+                        'Ops! Parece que algo deu errado. Por favor, tente novamente.',
+                })
+            }, 800)
+        } else if (res.status === 400) {
+            setTimeout(() => {
+                setLoading(false)
+                messageApi.open({
+                    type: 'error',
+                    content:
+                        'Este email já está em uso. Por favor, escolha outro ou faça login com sua conta existente.',
+                })
+            }, 800)
+        } else {
+            setTimeout(() => {
+                messageApi.open({
+                    type: 'success',
+                    content: 'Cadastrado com sucesso!',
+                })
+                setLoading(false)
+            }, 1200)
+            const intervalId = setInterval(() => {
+                if (!loading) {
+                    clearInterval(intervalId) // Parar de verificar quando loading for false
+                    router.push('/login')
+                }
+            }, 1500) // Verifica a cada 1 segundo
+        }
     }
     return (
         <Form methods={methods}>
