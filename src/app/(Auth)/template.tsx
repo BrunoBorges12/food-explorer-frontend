@@ -7,15 +7,12 @@ export default function Template({ children }: { children: React.ReactNode }) {
                 <span className="flex items-center gap-4 py-8 text-light-100 text-2xl  lg:gap-2">
                     <div className="lg:hidden">
                         {' '}
-                        <Logo size="small" />
+                        <Logo size="small" color="primary" />
                     </div>
                     <div className=" hidden lg:block">
                         {' '}
-                        <Logo size="large" />
+                        <Logo size="large" color="primary" />
                     </div>
-                    <span className="capitalize lg:text-4xl ">
-                        food explorer
-                    </span>
                 </span>
             </div>
             {children}
