@@ -51,7 +51,7 @@ const InputSearch: React.FC = () => {
     return (
         <AutoComplete
             className="w-full "
-            style={{ width: 500 }}
+            style={{ width: 600 }}
             popupMatchSelectWidth={500}
             options={options}
             onSelect={onSelect}
@@ -59,7 +59,7 @@ const InputSearch: React.FC = () => {
         >
             <Input
                 prefix={<SearchOutlined />}
-                className="!bg-dark-900 start- !text-light-100 placeholder:!text-light-100/80 before:pr-12 !flex items-center"
+                className="!bg-dark-900 !h-full  !rounded-sm !text-light-100 placeholder:!text-light-100/80 before:pr-12 !flex items-center"
                 classNames={{
                     input: '  placeholder:!text-light-100/80  ',
                 }}
