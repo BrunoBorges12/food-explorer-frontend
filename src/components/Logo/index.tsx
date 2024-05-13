@@ -8,6 +8,7 @@ export const Logo = ({ size, admin, color }: propsLogo) => {
             <IconLogo size={size} color={color} />
             <h1
                 className={cls(
+                    'text-nowrap',
                     size === 'large' ? 'text-4xl' : 'text-base',
                     color === 'primary' ? 'text-light-100' : 'text-light-700',
                 )}

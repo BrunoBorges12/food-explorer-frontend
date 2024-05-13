@@ -50,9 +50,7 @@ const InputSearch: React.FC = () => {
 
     return (
         <AutoComplete
-            className="w-full "
-            style={{ width: 600 }}
-            popupMatchSelectWidth={500}
+            className="lg:w-[600px] "
             options={options}
             onSelect={onSelect}
             onSearch={handleSearch}
