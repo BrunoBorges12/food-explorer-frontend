@@ -22,8 +22,6 @@ export const Button = (props: PropsButton) => {
         >
             <span className="text-light-100 text-center font-poppins  !text-sm   flex  gap-10">
                 <span>{props.label}</span>
-
-                {props.checkout && <span className="ml-1">( 1 )</span>}
             </span>
         </ButtonAntd>
     )
