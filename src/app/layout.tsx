@@ -3,6 +3,7 @@ import { Poppins, Roboto } from 'next/font/google'
 import './globals.css'
 import { AntdRegistry } from '@ant-design/nextjs-registry'
 import SessionWrapper from '@/components/SessionWrapper'
+import { CartProvider } from '@/context/cart'
 
 const inter = Poppins({
     subsets: ['latin'],
@@ -34,10 +35,12 @@ export default function RootLayout({
                 suppressHydrationWarning
                 className={`${inter.variable} ${roboto.variable}`}
             >
-                <AntdRegistry>
-                    {' '}
-                    <SessionWrapper>{children}</SessionWrapper>
-                </AntdRegistry>
+                <CartProvider>
+                    <AntdRegistry>
+                        {' '}
+                        <SessionWrapper>{children}</SessionWrapper>
+                    </AntdRegistry>
+                </CartProvider>
             </body>
         </html>
     )

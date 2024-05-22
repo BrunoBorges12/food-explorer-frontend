@@ -10,6 +10,7 @@ import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 import 'swiper/css/scrollbar'
 import { CardProduct } from './components/Card'
+import { data } from './components/mock/data'
 
 export const Products = () => {
     return (
@@ -22,18 +23,13 @@ export const Products = () => {
                 slidesPerView={4}
                 navigation
             >
-                <SwiperSlide>
-                    <CardProduct />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <CardProduct />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <CardProduct />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <CardProduct />
-                </SwiperSlide>
+                {data.map((product, idx) => {
+                    return (
+                        <SwiperSlide key={idx}>
+                            <CardProduct {...product} />
+                        </SwiperSlide>
+                    )
+                })}
             </Swiper>{' '}
         </div>
     )
