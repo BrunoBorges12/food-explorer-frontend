@@ -1,14 +1,32 @@
 'use client'
 
-import { data } from '@/components/Products/components/mock/data'
-import { createContext, useReducer, useState } from 'react'
+import { ProductWithQuantity } from '@/@types/product'
+import { act, createContext, useReducer } from 'react'
 
 export const CartContext = createContext()
-const reducer = (state, action) => {
-    console.log(state)
+
+function addProductToCart(
+    state: { cart: ProductWithQuantity[] },
+    product: ProductWithQuantity,
+) {
+    state.cart
+    const productIndex = state.cart.findIndex(
+        (productCart) => productCart.id === product.id,
+    )
+    if (productIndex > -1) {
+        state.cart[productIndex]['quantity'] = product.quantity
+        return [...state.cart]
+    }
+    return [...state.cart, product]
+}
+const reducer = (
+    state,
+    action: { type: string; product: ProductWithQuantity },
+) => {
+    const product = action.product
     switch (action.type) {
         case 'addCart':
-            return { cart: [state.product] }
+            return { cart: addProductToCart(state, product) }
     }
 }
 export const CartProvider = ({ children }) => {

@@ -8,7 +8,7 @@ export const data = [
         img: './product.png',
     },
     {
-        id: 1,
+        id: 2,
         name: 'Spaguetti Gambe',
         description:
             '  Rabanetes, folhas verdes e molho agridoce salpicados com gergelim',
@@ -16,7 +16,7 @@ export const data = [
         img: './product.png',
     },
     {
-        id: 1,
+        id: 3,
         name: 'Spaguetti Gambe',
         description:
             '  Rabanetes, folhas verdes e molho agridoce salpicados com gergelim',
@@ -24,7 +24,7 @@ export const data = [
         img: './product.png',
     },
     {
-        id: 1,
+        id: 4,
         name: 'Spaguetti Gambe',
         description:
             '  Rabanetes, folhas verdes e molho agridoce salpicados com gergelim',
@@ -32,7 +32,7 @@ export const data = [
         img: './product.png',
     },
     {
-        id: 1,
+        id: 5,
         name: 'Spaguetti Gambe',
         description:
             '  Rabanetes, folhas verdes e molho agridoce salpicados com gergelim',
@@ -40,7 +40,7 @@ export const data = [
         img: './product.png',
     },
     {
-        id: 1,
+        id: 6,
         name: 'Spaguetti Gambe',
         description:
             '  Rabanetes, folhas verdes e molho agridoce salpicados com gergelim',
@@ -48,7 +48,7 @@ export const data = [
         img: './product.png',
     },
     {
-        id: 1,
+        id: 7,
         name: 'Spaguetti Gambe',
         description:
             '  Rabanetes, folhas verdes e molho agridoce salpicados com gergelim',
@@ -56,7 +56,7 @@ export const data = [
         img: './product.png',
     },
     {
-        id: 1,
+        id: 8,
         name: 'Spaguetti Gambe',
         description:
             '  Rabanetes, folhas verdes e molho agridoce salpicados com gergelim',
