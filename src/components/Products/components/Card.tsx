@@ -11,9 +11,9 @@ import { Card, Image } from 'antd'
 import { Button } from '@/components/Button'
 import { useContext, useState } from 'react'
 import { CartContext } from '@/context/cart'
-import { productType } from '@/@types/product'
+import { IProduct } from '@/@types/product'
 
-export type propsCardProduct = productType
+export type propsCardProduct = IProduct
 export const CardProduct = ({
     name,
     price,
@@ -65,7 +65,14 @@ export const CardProduct = ({
                     onClick={() => {
                         dispatch({
                             type: 'addCart',
-                            product: { id, name, description, price, quantity },
+                            product: {
+                                id,
+                                name,
+                                description,
+                                price,
+                                quantity,
+                                img,
+                            },
                         })
                     }}
                 />

@@ -1,40 +1,39 @@
 'use client'
 
-import { ProductWithQuantity } from '@/@types/product'
-import { act, createContext, useReducer } from 'react'
+import { IProductQuantity } from '@/@types/product'
+import addProductToCart from '@/utils/addProductToCart'
+import React, { Dispatch, createContext, useReducer } from 'react'
 
-export const CartContext = createContext()
-
-function addProductToCart(
-    state: { cart: ProductWithQuantity[] },
-    product: ProductWithQuantity,
-) {
-    state.cart
-    const productIndex = state.cart.findIndex(
-        (productCart) => productCart.id === product.id,
-    )
-    if (productIndex > -1) {
-        state.cart[productIndex]['quantity'] = product.quantity
-        return [...state.cart]
-    }
-    return [...state.cart, product]
+type propsCartProvider = {
+    children: React.ReactNode
 }
+interface cartContext {
+    data: { cart: IProductQuantity[] }
+    dispatch: Dispatch<{ type: string; product: IProductQuantity }>
+}
+const initialState = { cart: [] }
+
+export const CartContext = createContext<cartContext>({
+    dispatch: () => {},
+    data: initialState,
+})
+
 const reducer = (
-    state,
-    action: { type: string; product: ProductWithQuantity },
+    state: { cart: IProductQuantity[] },
+    action: { type: string; product: IProductQuantity },
 ) => {
     const product = action.product
     switch (action.type) {
         case 'addCart':
             return { cart: addProductToCart(state, product) }
+        default:
+            return { cart: state.cart }
     }
 }
-export const CartProvider = ({ children }) => {
-    const [data, dispatch] = useReducer(reducer, { cart: [] })
-    console.log(data)
+export const CartProvider = ({ children }: propsCartProvider) => {
+    const [data, dispatch] = useReducer(reducer, initialState)
     return (
-        <CartContext.Provider value={{ teste: '1', dispatch: dispatch }}>
-            {' '}
+        <CartContext.Provider value={{ data: data, dispatch }}>
             {children}
         </CartContext.Provider>
     )

@@ -1,4 +1,4 @@
-export type productType = {
+export type IProduct = {
     id: number
     name: string
     description: string
@@ -6,6 +6,6 @@ export type productType = {
     img: string
 }
 
-export interface ProductWithQuantity extends productType {
+export interface IProductQuantity extends IProduct {
     quantity: number
 }
