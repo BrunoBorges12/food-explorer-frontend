@@ -1,4 +1,5 @@
 import { Flex, Image, Space } from 'antd'
+import { FaCreditCard, FaPix } from 'react-icons/fa6'
 
 export const Cart = () => {
     return (
@@ -38,6 +39,18 @@ export const Cart = () => {
                 </Space>
                 <Space className="w-1/2" direction={'vertical'} size={70}>
                     <h1 className="text-2xl">Pagamento</h1>
+                    <div className="border bg-dark-800">
+                        <Flex>
+                            <div className="flex items-center w-1/2 border-r  py-5 justify-center gap-2">
+                                <FaPix />
+                                Pix
+                            </div>
+                            <div className="flex items-center w-1/2 py-5  justify-center gap-5">
+                                <FaCreditCard />
+                                Crédico
+                            </div>
+                        </Flex>
+                    </div>
                 </Space>
             </div>
         </Flex>
