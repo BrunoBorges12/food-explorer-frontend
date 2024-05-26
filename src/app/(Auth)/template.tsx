@@ -6,11 +6,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
             <div>
                 <span className="flex items-center gap-4 py-8 text-light-100 text-2xl  lg:gap-2">
                     <div className="lg:hidden">
-                        {' '}
                         <Logo size="small" color="primary" />
                     </div>
                     <div className=" hidden lg:block">
-                        {' '}
                         <Logo size="large" color="primary" />
                     </div>
                 </span>
