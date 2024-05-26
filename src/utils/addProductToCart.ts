@@ -4,12 +4,19 @@ export default function addProductToCart(
     state: { cart: IProductQuantity[] },
     product: IProductQuantity,
 ) {
-    const productIndex = state.cart.findIndex(
+    //retorna  um array de valores
+    const cartStorage = state.cart
+    const productIndex = cartStorage.findIndex(
         (productCart) => productCart.id === product.id,
     )
+
     if (productIndex > -1) {
-        state.cart[productIndex]['quantity'] = product.quantity
-        return [...state.cart]
+        cartStorage[productIndex].quantity = product.quantity
+    } else {
+        cartStorage.push(product)
     }
-    return [...state.cart, product]
+
+    localStorage.setItem('cartItems', JSON.stringify(cartStorage))
+
+    return cartStorage
 }

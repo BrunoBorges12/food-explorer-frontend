@@ -19,7 +19,7 @@ export const Cart = () => {
                     wrap={true}
                     className="w-1/2"
                     direction={'vertical'}
-                    size={70}
+                    size={50}
                 >
                     <h1 className="text-2xl">Meu Pedido</h1>
                     <Space>
@@ -46,6 +46,9 @@ export const Cart = () => {
                             </Flex>
                         </Flex>
                     </Space>
+                    <span className="text-light-300 text-2xl">
+                        Total: R$ 103,88{' '}
+                    </span>
                 </Space>
                 <Space className="w-1/2" direction={'vertical'} size={70}>
                     <h1 className="text-2xl">Pagamento</h1>
