@@ -6,12 +6,17 @@ import { Input } from '../Input'
 import { useForm } from 'react-hook-form'
 import { Button } from '../Button'
 import Ticket from '../Navigation/components/Icons/Ticket'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import classNames from 'classnames'
+import { CartContext } from '@/context/cart'
 
 export const Cart = () => {
     const [tabs, setTabs] = useState('pix')
     const methods = useForm()
+    const { data } = useContext(CartContext)
+    const totalSumCart = data.cart.reduce((acc, currentValue) => {
+        return acc + parseFloat(currentValue.price) * currentValue.quantity
+    }, 0)
     return (
         <Flex className="text-white pt-40" justify="space-between">
             <div className="container lg:px-28">
@@ -22,32 +27,45 @@ export const Cart = () => {
                     size={50}
                 >
                     <h1 className="text-2xl">Meu Pedido</h1>
-                    <Space>
-                        <Flex wrap={true} align="center" gap={14}>
-                            <Image
-                                className="!w-20  !h-20"
-                                src="./product.png"
-                                alt="pe"
-                            />
-                            <Flex vertical align="start">
-                                <div className="flex gap-5">
-                                    <p className="text-2xl">
-                                        {' '}
-                                        1 x Salada Radish
-                                    </p>
-                                    <span className="text-sm text-light-400">
-                                        R$ 25,97
-                                    </span>
-                                </div>
+                    <Space direction="vertical" size={10}>
+                        {data.cart.map((cart) => {
+                            return (
+                                <Flex
+                                    key={cart.id}
+                                    wrap={true}
+                                    align="center"
+                                    gap={14}
+                                >
+                                    <Image
+                                        className="!w-20  !h-20"
+                                        src={cart.img}
+                                        alt={cart.name}
+                                    />
+                                    <Flex vertical align="start">
+                                        <div className="flex gap-5">
+                                            <p className="text-2xl">
+                                                {' '}
+                                                {cart.quantity} x {cart.name}
+                                            </p>
+                                            <span className="text-sm text-light-400">
+                                                R$ {cart.price}
+                                            </span>
+                                        </div>
 
-                                <button className="text-red-500  text-xs">
-                                    Excluir
-                                </button>
-                            </Flex>
-                        </Flex>
+                                        <button className="text-red-500  text-xs">
+                                            Excluir
+                                        </button>
+                                    </Flex>
+                                </Flex>
+                            )
+                        })}
                     </Space>
                     <span className="text-light-300 text-2xl">
-                        Total: R$ 103,88{' '}
+                        Total:
+                        {totalSumCart.toLocaleString('pt-br', {
+                            style: 'currency',
+                            currency: 'BRL',
+                        })}
                     </span>
                 </Space>
                 <Space className="w-1/2" direction={'vertical'} size={70}>
