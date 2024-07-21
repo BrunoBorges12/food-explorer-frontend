@@ -6,6 +6,7 @@ import React, { useContext } from 'react'
 import { GoSignOut } from 'react-icons/go'
 import { Logo } from '@/components/Logo'
 import { CartContext } from '@/context/cart'
+import { signOut } from 'next-auth/react'
 
 export const Navbar = () => {
     const { data } = useContext(CartContext)
@@ -25,7 +26,10 @@ export const Navbar = () => {
                     />
                 </div>
                 <div className="text-white">
-                    <GoSignOut className="w-8 h-8" />
+                    <GoSignOut
+                        onClick={() => signOut()}
+                        className="w-8 h-8 cursor-pointer"
+                    />
                 </div>
             </div>
             <div className="lg:hidden">

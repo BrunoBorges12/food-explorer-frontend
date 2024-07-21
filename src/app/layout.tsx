@@ -4,7 +4,6 @@ import './globals.css'
 import { AntdRegistry } from '@ant-design/nextjs-registry'
 import SessionWrapper from '@/components/SessionWrapper'
 import { CartProvider } from '@/context/cart'
-import { Navigation } from '@/components/Navigation'
 
 const inter = Poppins({
     subsets: ['latin'],
@@ -39,10 +38,7 @@ export default function RootLayout({
                 <CartProvider>
                     <AntdRegistry>
                         {' '}
-                        <SessionWrapper>
-                            <Navigation />
-                            {children}
-                        </SessionWrapper>
+                        <SessionWrapper>{children}</SessionWrapper>
                     </AntdRegistry>
                 </CartProvider>
             </body>
