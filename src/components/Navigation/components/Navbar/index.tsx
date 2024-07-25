@@ -6,24 +6,30 @@ import React, { useContext } from 'react'
 import { GoSignOut } from 'react-icons/go'
 import { Logo } from '@/components/Logo'
 import { CartContext } from '@/context/cart'
-import { signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 
 export const Navbar = () => {
+    const { data: session } = useSession()
+
     const { data } = useContext(CartContext)
     return (
         <>
             <div className="lg:pt-1 ">
-                <Logo size="small" color="primary" />
+                <Logo size="small" color="primary" admin={session?.admin} />
             </div>
             <div className=" hidden items-center  lg:gap-16 lg:flex">
                 <div className="pb-2">
                     <InputSearch />
                 </div>
                 <div>
-                    <Button
-                        icon={<Ticket />}
-                        label={`Pedidos (${data.cart.length}) `}
-                    />
+                    {session?.admin ? (
+                        <Button label="Novo Prato" />
+                    ) : (
+                        <Button
+                            icon={<Ticket />}
+                            label={`Pedidos (${data.cart.length}) `}
+                        />
+                    )}
                 </div>
                 <div className="text-white">
                     <GoSignOut
