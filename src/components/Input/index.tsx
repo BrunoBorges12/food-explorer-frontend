@@ -33,7 +33,7 @@ export const Input = (props: propsInput) => {
     const { id, label, background, className, ...rest } = props
 
     return (
-        <p className="flex flex-col gap-2 justify-center text-base">
+        <p className="flex flex-col gap-2 justify-center text-base ">
             <label className="text-light-400 " htmlFor={id}>
                 {label}
             </label>
@@ -67,5 +67,3 @@ export const Input = (props: propsInput) => {
         </p>
     )
 }
-
-Input.displayName = 'Input'

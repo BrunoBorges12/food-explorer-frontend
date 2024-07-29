@@ -48,6 +48,7 @@ export const FormLogin = () => {
                     placeholder="Exemplo: exemplo@exemplo.com.br"
                 />
                 <Input
+                    className="!w-full"
                     label="Password"
                     id="password"
                     type="password"

@@ -38,3 +38,6 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
     -moz-appearance: textfield;
 }
+.ant-select-single.ant-select-open .ant-select-selection-item{
+  @apply !text-light-200
+}
