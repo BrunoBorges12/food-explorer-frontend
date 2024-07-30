@@ -4,6 +4,7 @@ import { UploadOutlined } from '@ant-design/icons'
 import { useForm } from 'react-hook-form'
 import { Input } from './components'
 import { input } from './components/tailwindcss/variants'
+import TagInput from '@/components/TagInput'
 
 export const FormAddPlate = () => {
     const { base } = input()
@@ -56,6 +57,9 @@ export const FormAddPlate = () => {
                             ]}
                         />
                     </p>
+                </div>
+                <div>
+                    <TagInput />
                 </div>
             </Form>
         </div>
