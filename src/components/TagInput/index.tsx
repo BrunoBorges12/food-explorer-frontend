@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import { FaPlus } from 'react-icons/fa6'
 
@@ -16,7 +16,12 @@ const TagInput = () => {
 
         setInputValue(eventValue)
     }
-
+    const clearTagsID = (e: React.MouseEvent<HTMLElement>) => {
+        const filterTags: string[] = tags.filter(
+            (_, i) => `${i}` != e.currentTarget.id,
+        )
+        setTags(filterTags)
+    }
     const addTags = () => {
         if (inputValue.length >= 1) {
             setTags((currentTags) => [...currentTags, inputValue])
@@ -25,19 +30,25 @@ const TagInput = () => {
         setInputValue('')
     }
     return (
-        <div className="flex  flex-col pt-7 ">
-            <label htmlFor=""> </label>
-            <div className="select-none inline-block max-w-full py-2  align-middle  bg-dark-800 border rounded-md relative">
-                <div className=" py-2 inline-block">
-                    <ul className="  flex">
+        <div className="flex  flex-col   relative gap-2 w-[805px] ">
+            <label className="text-light-400" htmlFor="">
+                Ingredientes{' '}
+            </label>
+            <div className="select-none inline-block max-w-full py-1  align-middle  bg-dark-800 border rounded-lg relative">
+                <div className=" relative  max-w-full py-2 inline-block">
+                    <ul className="  flex flex-wrap gap-1 ml-3">
                         {tags?.map((tag, index) => {
                             return (
                                 <li
                                     key={index}
-                                    className=" mx-3 overflow-hidden   text-ellipsis  align-top text-nowrap  px-2   relative bg-dark-1000  text-light-400 flex  items-center rounded-md"
+                                    className=" overflow-hidden   text-ellipsis  align-top text-nowrap  px-2   relative bg-cake-100  text-light-100 text-sm flex font-roboto   items-center rounded-md"
                                 >
                                     <span>{tag}</span>
-                                    <button className="py-[6px] flex justify-end w-full pl-3">
+                                    <button
+                                        onClick={clearTagsID}
+                                        id={`${index}`}
+                                        className="py-[6px] flex justify-end w-full pl-3"
+                                    >
                                         <IoCloseOutline />
                                     </button>
                                 </li>
@@ -56,7 +67,7 @@ const TagInput = () => {
                             onChange={handleInput}
                             className="w-6 outline-none bg-dark-800 text-light-400
                             
-                            border-none  h-5 inline-block min-w-4  "
+                            border-none  h-5 inline-block min-w-4  mr-2 "
                         />
                         <div
                             style={{

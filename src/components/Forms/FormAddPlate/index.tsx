@@ -58,8 +58,13 @@ export const FormAddPlate = () => {
                         />
                     </p>
                 </div>
-                <div>
+                <div className="flex items-center pt-7 gap-8        ">
                     <TagInput />
+                    <Input.Text
+                        width="261px"
+                        label={'Nome'}
+                        background="dark-800"
+                    />
                 </div>
             </Form>
         </div>
