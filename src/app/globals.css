@@ -41,3 +41,6 @@ input[type="number"] {
 .ant-select-single.ant-select-open .ant-select-selection-item{
   @apply !text-light-200
 }
+.ant-input-number-input{
+  @apply !text-white
+}

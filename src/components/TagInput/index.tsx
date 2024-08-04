@@ -2,12 +2,15 @@
 import React, { useState } from 'react'
 import { IoCloseOutline } from 'react-icons/io5'
 import { FaPlus } from 'react-icons/fa6'
+import { useFormContext } from 'react-hook-form'
 
 const TagInput = () => {
+    const { setValue } = useFormContext() // retrieve all hook methods
+
     const [tags, setTags] = useState<string[]>([])
     const [inputValue, setInputValue] = useState('')
     const [widthInput, setWidthInput] = useState(10)
-
+    setValue('tags', tags)
     const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
         const eventValue = e.target.value as string
         const lengthDifference = eventValue.length - inputValue.length // verifica se está deletado  ou não
