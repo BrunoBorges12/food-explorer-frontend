@@ -4,4 +4,5 @@ export interface InputProps {
     placeholder?: string
     background: 'dark-800' | 'dark-900'
     width?: string
+    name: string
 }

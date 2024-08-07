@@ -3,6 +3,7 @@ import { InputNumber as InputNumberAntd } from 'antd'
 import { InputProps } from '../@types/inputs'
 import { input } from '../tailwindcss/variants'
 import cls from 'classnames'
+import { useFormContext } from 'react-hook-form'
 
 interface inputTextProps extends InputProps {}
 
@@ -11,7 +12,9 @@ export const InputNumber = ({
     id,
     background,
     width,
+    name,
 }: inputTextProps) => {
+    const { setValue } = useFormContext()
     const { base, labelText, inputwa } = input()
     return (
         <p className={base()} style={{ width }}>
@@ -19,16 +22,18 @@ export const InputNumber = ({
                 {label}
             </label>
             <InputNumberAntd
-                formatter={(value) =>
-                    `R$ ${value}`
+                formatter={(value) => {
+                    setValue(name, value)
+
+                    return `R$ ${value}`
                         .replace(/\B(?=(\d{3})+(?!\d))/g, '.')
                         .replace(/(\d+)(\.\d{2})$/, '$1,$2')
-                }
-                parser={(value) =>
-                    value
+                }}
+                parser={(value) => {
+                    return value
                         ?.replace(/R\$\s?|(\.*)/g, '')
                         .replace(',', '.') as unknown as number
-                }
+                }}
                 className={inputwa({
                     className: cls(
                         {

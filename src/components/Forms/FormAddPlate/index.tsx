@@ -7,28 +7,51 @@ import { input } from './components/tailwindcss/variants'
 import TagInput from '@/components/TagInput'
 import TextArea from 'antd/es/input/TextArea'
 import { Button } from '@/components/Button'
-import { useState } from 'react'
+import { UploadChangeParam } from 'antd/es/upload'
+import axios from 'axios'
+import { plateProps } from './@types/plate'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { plateZod } from './schema/plate'
 
 export const FormAddPlate = () => {
-    const [fileList, setFileList] = useState([])
-
     const { base } = input()
 
-    const methods = useForm({})
-    const onSubmit = (data) => console.log(data)
+    const methods = useForm<plateProps>({ resolver: zodResolver(plateZod) })
+    const onSubmit = async (data: plateProps) => {
+        const formData = new FormData()
+        if (data.file) {
+            formData.append('file', data.file)
+        }
+        formData.append('name', 'teste1')
+        formData.append('description', 'teste1')
+        formData.append('   ', '[')
+        console.log(data)
+        try {
+            console.log('foi')
 
-    const handleChange = (info) => {
-        setFileList(info.fileList)
-        console.log('11')
-        if (info.file.status !== 'uploading') {
-            methods.setValue('file', info.file.originFileObj) // Set the file to react-hook-form
+            const response = await axios.post(
+                'http://127.0.0.1:8000/v1/api/create_product',
+                formData,
+                {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                },
+            )
+            console.log(response.data)
+        } catch (error) {
+            console.error(error)
         }
     }
 
-    const props = {
+    const handleChange = (info: UploadChangeParam) => {
+        if (info.file.status !== 'uploading') {
+            methods.setValue('file', info.file.originFileObj as File)
+        }
+    }
+
+    const props: UploadProps = {
         onChange: handleChange,
-        beforeUpload: () => false, // Prevent auto upload
-        fileList: fileList,
     }
 
     return (
@@ -43,7 +66,7 @@ export const FormAddPlate = () => {
                             Imagem do prato
                         </label>
 
-                        <Upload {...props}>
+                        <Upload maxCount={1} {...props}>
                             <Button
                                 label="Selecione imagem"
                                 className="!bg-dark-800 !text-light-100 !rounded-lg !py-5 !flex items-center font-poppins !text-base"
@@ -58,6 +81,7 @@ export const FormAddPlate = () => {
                         </Upload>
                     </p>
                     <Input.Text
+                        name="name"
                         width="463px"
                         label={'Nome'}
                         background="dark-800"
@@ -96,6 +120,7 @@ export const FormAddPlate = () => {
                 <div className="flex items-center pt-7 gap-8        ">
                     <TagInput />
                     <Input.Number
+                        name="price"
                         width="290px"
                         label={'Preço'}
                         background="dark-800"

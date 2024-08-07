@@ -11,9 +11,9 @@ body{
 }
 .anticon.ant-input-password-icon > svg{
   @apply w-4 h-4
-}
+  }
 
-.loading{
+  .loading{
   animation: 0.3s cubic-bezier(0.47, 0, 0.745, 0.715) 0s 1 normal both running loading;
 }
 @keyframes loading {
