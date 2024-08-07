@@ -66,7 +66,11 @@ export const FormAddPlate = () => {
                             Imagem do prato
                         </label>
 
-                        <Upload maxCount={1} {...props}>
+                        <Upload
+                            maxCount={1}
+                            {...props}
+                            className="!text-tomato-400"
+                        >
                             <Button
                                 label="Selecione imagem"
                                 className="!bg-dark-800 !text-light-100 !rounded-lg !py-5 !flex items-center font-poppins !text-base"

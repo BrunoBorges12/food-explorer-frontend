@@ -44,3 +44,6 @@ input[type="number"] {
 .ant-input-number-input{
   @apply !text-white
 }
+.anticon.anticon-delete{
+    @apply !text-white
+}
